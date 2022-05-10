@@ -15,7 +15,7 @@ namespace NFTViewer
 
         private Texture[] _textures;
 
-        public void Awake()
+        private void Awake()
         {
             _viewMode = ViewMode.View2D;
             _viewModes = System.Enum.GetValues(typeof(ViewMode)) as ViewMode[];

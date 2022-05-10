@@ -18,7 +18,7 @@ namespace NFTViewer
 
         public void PlayNotification()
         {
-            gameObject.SetActive(true);
+            transform.parent.gameObject.SetActive(true);
 
             if (_autoDisable != null)
             {
@@ -48,17 +48,26 @@ namespace NFTViewer
             Vector2 targetPosition = new Vector2(-Screen.width, _rectTransform.anchoredPosition.y);
             _animation = _rectTransform.DOAnchorPos(targetPosition, 0.5f, false)
                 .SetEase(Ease.InOutElastic);
+
+            yield return new WaitForSeconds(0.5f);
+            transform.parent.gameObject.SetActive(false);
         }
 
         public void Hide()
         {
+            if (_autoDisable != null)
+            {
+                StopCoroutine(_autoDisable);
+                _autoDisable = null;
+            }
+
             if (_animation != null)
             {
                 _animation.Kill();
                 _animation = null;
             }
 
-            gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false);
         }
 
         private void OnDisable()

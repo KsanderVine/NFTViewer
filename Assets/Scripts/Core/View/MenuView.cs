@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace NFTViewer.UI
 {
@@ -23,6 +24,8 @@ namespace NFTViewer.UI
         public void Show()
         {
             gameObject.SetActive(true);
+            ((RectTransform)transform).anchoredPosition += (Vector2.right * Screen.width);
+            ((RectTransform)transform).DOAnchorPosX(0, 0.5f, false).SetEase(Ease.OutExpo);
         }
     }
 }

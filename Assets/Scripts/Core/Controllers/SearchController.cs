@@ -9,7 +9,7 @@ namespace NFTViewer
         private SearchView _searchView;
         private SearchSample _lastSearchSample;
 
-        public void Awake()
+        private void Awake()
         {
             _textureLoader = FindObjectOfType<TextureLoader>(true);
             _searchView = FindObjectOfType<SearchView>(true);

@@ -1,17 +1,17 @@
 using NFTViewer.UI;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 
 namespace NFTViewer
 {
     public class MenuController : MonoBehaviour, IController
     {
         private MenuView _menuView;
+        private Localization _localization;
 
-        public void Awake()
+        private void Awake()
         {
             _menuView = FindObjectOfType<MenuView>(true);
+            _localization = FindObjectOfType<Localization>(true);
 
             _menuView.LanguageToolbar.OnToggled += LanguageToggled;
             _menuView.BackButton.onClick.AddListener(MoveToSearch);
@@ -26,8 +26,7 @@ namespace NFTViewer
 
         private void LanguageToggled(int languageID)
         {
-            Locale locale = LocalizationSettings.AvailableLocales.Locales[languageID];
-            LocalizationSettings.SelectedLocale = locale;
+            _localization.SetLocaleByIndex(languageID);
         }
 
         public void OnStateChanged(ApplicationState applicationState)
@@ -38,18 +37,7 @@ namespace NFTViewer
                 return;
             }
 
-            int toolbarID = 0;
-            foreach (Locale locale in LocalizationSettings.AvailableLocales.Locales)
-            {
-                if (locale != LocalizationSettings.SelectedLocale)
-                {
-                    toolbarID++;
-                }
-                else
-                {
-                    break;
-                }
-            }
+            int toolbarID = _localization.GetCurrentLocaleIndex();
 
             _menuView.Show();
             _menuView.LanguageToolbar.SetDefaultToggle(toolbarID);

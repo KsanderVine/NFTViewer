@@ -7,7 +7,7 @@ namespace NFTViewer
     {
         private LoadingView _loadingView;
 
-        public void Awake()
+        private void Awake()
         {
             _loadingView = FindObjectOfType<LoadingView>(true);
             Application.OnStateChanged += OnStateChanged;

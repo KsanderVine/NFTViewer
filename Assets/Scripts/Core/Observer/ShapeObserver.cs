@@ -7,7 +7,7 @@ namespace NFTViewer
         private IShape _shape;
         private IObserverController[] _observerControllers;
 
-        public void Awake()
+        private void Awake()
         {
             _shape = GetComponentInChildren<IShape>(true);
             _observerControllers = GetComponents<IObserverController>();

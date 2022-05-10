@@ -7,7 +7,7 @@ namespace NFTViewer
         public int SidesCount => 6;
         private ISide[] _sides;
 
-        public void Awake()
+        private void Awake()
         {
             _sides = GetComponentsInChildren<ISide>(true);
         }

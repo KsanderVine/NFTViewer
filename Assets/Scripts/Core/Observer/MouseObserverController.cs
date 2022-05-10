@@ -25,8 +25,6 @@ namespace NFTViewer
 
         private void Update()
         {
-            // todo: проверка на пересечение с UI
-
             if (Input.GetMouseButtonUp(0))
                 _isPressed = false;
 

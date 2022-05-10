@@ -13,7 +13,7 @@ namespace NFTViewer
             OnStateChanged?.Invoke(applicationState);
         }
 
-        public void Start()
+        private void Start()
         {
             ChangeState(ApplicationState.Search);
         }

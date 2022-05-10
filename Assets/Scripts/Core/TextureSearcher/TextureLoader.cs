@@ -6,7 +6,7 @@ namespace NFTViewer
     {
         public RaribleTextureSearcher RaribleTextureSearcher { get; private set; }
 
-        public void Awake()
+        private void Awake()
         {
             RaribleTextureSearcher = GetComponent<RaribleTextureSearcher>();
         }

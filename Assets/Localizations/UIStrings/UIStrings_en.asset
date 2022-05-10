@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 195944730624
-    m_Localized: Loading...
+    m_Localized: LOADING...
     m_Metadata:
       m_Items: []
   - m_Id: 164147712000
@@ -27,19 +27,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 144648392704
-    m_Localized: Search
+    m_Localized: SEARCH
     m_Metadata:
       m_Items: []
   - m_Id: 123760758784
-    m_Localized: Collection
+    m_Localized: COLLECTION
     m_Metadata:
       m_Items: []
   - m_Id: 108690624512
-    m_Localized: Creator
+    m_Localized: CREATOR
     m_Metadata:
       m_Items: []
   - m_Id: 92857126912
-    m_Localized: Owner
+    m_Localized: OWNER
     m_Metadata:
       m_Items: []
   - m_Id: 61781528576
