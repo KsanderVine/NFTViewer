@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NFTViewer.UI;
-using Applicaton = NFTViewer.Applicaton;
+using Application = NFTViewer.Application;
 
 namespace NFTViewer
 {
@@ -10,35 +10,25 @@ namespace NFTViewer
     {
         private SearchView _searchView;
 
-        private string _address;
-        private AddressType _addressType;
-
-        private AddressType[] _addressTypes;
-
         public void Awake()
         {
-            _addressType = AddressType.Owner;
-            _addressTypes = System.Enum.GetValues(typeof(AddressType)) as AddressType[];
-
             _searchView = FindObjectOfType<SearchView>(true);
-
             _searchView.BackButton.onClick.AddListener(MoveToBrowse);
+            _searchView.MenuButton.onClick.AddListener(MoveToMenu);
             _searchView.SubmitButton.onClick.AddListener(SubmitSearch);
-            _searchView.AddressTypeToolbar.OnToggled += AddressTypeToggled;
 
-            Applicaton.OnStateChanged += OnStateChanged;
-        }
-
-        private void AddressTypeToggled(int toggleID)
-        {
-            if (toggleID >= 0 && toggleID < _addressTypes.Length)
-                _addressType = (AddressType)toggleID;
+            Application.OnStateChanged += OnStateChanged;
         }
 
         private void MoveToBrowse ()
         {
             // todo: если данных нет, то попап
-            Applicaton.ChangeState(ApplicationState.Browse);
+            Application.ChangeState(ApplicationState.Browse);
+        }
+
+        private void MoveToMenu ()
+        {
+            Application.ChangeState(ApplicationState.Menu);
         }
 
         private void SubmitSearch ()
@@ -52,7 +42,7 @@ namespace NFTViewer
             
             // todo: если нет данных на сервере, то _searchView.Clean();
 
-            Applicaton.ChangeState(ApplicationState.Loading);
+            Application.ChangeState(ApplicationState.Loading);
         }
 
         public void OnStateChanged(ApplicationState applicationState)

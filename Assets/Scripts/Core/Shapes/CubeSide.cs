@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NFTViewer
 {
-    public class CubeSide : MonoBehaviour, IShapeSide
+    public class CubeSide : MonoBehaviour, ISide
     {
         private MeshRenderer _meshRenderer;
 

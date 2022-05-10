@@ -10,5 +10,8 @@ namespace NFTViewer
 
         void Rotate(Vector3 axis);
         void SetTextures(params Texture[] textures);
+
+        void Show();
+        void Hide();
     }
 }

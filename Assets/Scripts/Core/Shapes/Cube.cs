@@ -7,11 +7,11 @@ namespace NFTViewer
     public class Cube : MonoBehaviour, IShape
     {
         public int SidesCount => _sides.Length;
-        private IShapeSide[] _sides;
+        private ISide[] _sides;
 
         public void Awake()
         {
-            _sides = GetComponentsInChildren<IShapeSide>(true);
+            _sides = GetComponentsInChildren<ISide>(true);
         }
 
         public void SetTextures(params Texture[] textures)
@@ -44,5 +44,11 @@ namespace NFTViewer
             axis = transform.InverseTransformDirection(axis);
             transform.Rotate(axis, Space.Self);
         }
+
+        public void Show() =>
+            gameObject.SetActive(true);
+
+        public void Hide() =>
+            gameObject.SetActive(false);
     }
 }

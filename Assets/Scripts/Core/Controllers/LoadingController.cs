@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NFTViewer.UI;
-using Applicaton = NFTViewer.Applicaton;
+using Applicaton = NFTViewer.Application;
 
 namespace NFTViewer
 {
@@ -13,7 +13,7 @@ namespace NFTViewer
         public void Awake()
         {
             _loadingView = FindObjectOfType<LoadingView>(true);
-            Applicaton.OnStateChanged += OnStateChanged;
+            Application.OnStateChanged += OnStateChanged;
         }
 
         public void OnStateChanged(ApplicationState applicationState)

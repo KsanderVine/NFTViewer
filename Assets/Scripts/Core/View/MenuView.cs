@@ -7,6 +7,14 @@ namespace NFTViewer.UI
 {
     public class MenuView : MonoBehaviour, IView
     {
+        [SerializeField]
+        private SmoothToolbar _languageToolbar;
+        public SmoothToolbar LanguageToolbar { get => _languageToolbar; }
+
+        [SerializeField]
+        private Button _backButton;
+        public Button BackButton { get => _backButton; }
+
         public bool IsVisible() => gameObject.activeInHierarchy;
 
         public void Hide()

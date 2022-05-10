@@ -5,7 +5,7 @@ using System;
 
 namespace NFTViewer
 {
-    public class Applicaton : MonoBehaviour
+    public class Application : MonoBehaviour
     {
         public static ApplicationState ApplicationState { get; private set; }
         public static event Action<ApplicationState> OnStateChanged;

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NFTViewer.UI;
-using Applicaton = NFTViewer.Applicaton;
 
 namespace NFTViewer
 {
@@ -13,7 +12,21 @@ namespace NFTViewer
         public void Awake()
         {
             _menuView = FindObjectOfType<MenuView>(true);
-            Applicaton.OnStateChanged += OnStateChanged;
+
+            _menuView.LanguageToolbar.OnToggled += LanguageToggled;
+            _menuView.BackButton.onClick.AddListener(MoveToSearch);
+
+            Application.OnStateChanged += OnStateChanged;
+        }
+
+        private void MoveToSearch ()
+        {
+            Application.ChangeState(ApplicationState.Search);
+        }
+
+        private void LanguageToggled(int languageID)
+        {
+            // todo: ре-транслировать приложение
         }
 
         public void OnStateChanged(ApplicationState applicationState)

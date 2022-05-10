@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NFTViewer
 {
-    public class MouseObserverController : MonoBehaviour, IObserver
+    public class MouseObserverController : MonoBehaviour, IObserverController
     {
         [SerializeField]
         [Range(1, 30)]
@@ -16,8 +16,14 @@ namespace NFTViewer
 
         private void Awake()
         {
-            _shape = GetComponentInChildren<IShape>();
+            _shape = GetComponentInChildren<IShape>(true);
         }
+
+        public void Activate() =>
+            enabled = true;
+
+        public void Deactivate() =>
+            enabled = false;
 
         private void Update()
         {
@@ -28,8 +34,11 @@ namespace NFTViewer
 
             if (Input.GetMouseButtonDown(0))
             {
-                _lastPosition = Input.mousePosition;
-                _isPressed = true;
+                if (!PointerInfo.IsPointerOverUIObject())
+                {
+                    _lastPosition = Input.mousePosition;
+                    _isPressed = true;
+                }
             }
 
             if (_isPressed)

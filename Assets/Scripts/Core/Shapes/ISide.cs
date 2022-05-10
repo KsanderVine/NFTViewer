@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NFTViewer
 {
-    public interface IShapeSide
+    public interface ISide
     {
         void SetTexture(Texture texture);
     }

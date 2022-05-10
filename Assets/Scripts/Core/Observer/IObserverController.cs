@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace NFTViewer
 {
-    public interface IObserver
+    public interface IObserverController
     {
+        void Activate();
+        void Deactivate();
     }
 }
