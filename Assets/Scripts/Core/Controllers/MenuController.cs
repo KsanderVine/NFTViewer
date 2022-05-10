@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using NFTViewer.UI;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace NFTViewer
 {
@@ -26,7 +26,8 @@ namespace NFTViewer
 
         private void LanguageToggled(int languageID)
         {
-            // todo: ре-транслировать приложение
+            Locale locale = LocalizationSettings.AvailableLocales.Locales[languageID];
+            LocalizationSettings.SelectedLocale = locale;
         }
 
         public void OnStateChanged(ApplicationState applicationState)
@@ -36,7 +37,23 @@ namespace NFTViewer
                 _menuView.Hide();
                 return;
             }
+
+            int toolbarID = 0;
+            foreach (Locale locale in LocalizationSettings.AvailableLocales.Locales)
+            {
+                if (locale != LocalizationSettings.SelectedLocale)
+                {
+                    toolbarID++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             _menuView.Show();
+            _menuView.LanguageToolbar.SetDefaultToggle(toolbarID);
+            _menuView.LanguageToolbar.SetToggle(toolbarID);
         }
     }
 }

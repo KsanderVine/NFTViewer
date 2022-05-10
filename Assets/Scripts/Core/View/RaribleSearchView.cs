@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +14,29 @@ namespace NFTViewer.UI
         public SmoothToolbar AddressTypeToolbar { get => _addressTypeToolbar; }
 
         [SerializeField]
-        private PopupNotification _popupNotification;
+        private PopupNotification _popupNotification_EmptySearch;
 
-        public override void Hide() =>
+        [SerializeField]
+        private PopupNotification _popupNotification_EmptySearchResult;
+
+        [SerializeField]
+        private PopupNotification _popupNotification_EmptySearchSample;
+
+        public override void Hide()
+        {
+            _popupNotification_EmptySearch.Hide();
+            _popupNotification_EmptySearchResult.Hide();
+            _popupNotification_EmptySearchSample.Hide();
             gameObject.SetActive(false);
+        }
 
-        public override void Show() =>
+        public override void Show()
+        {
+            _popupNotification_EmptySearch.Hide();
+            _popupNotification_EmptySearchResult.Hide();
+            _popupNotification_EmptySearchSample.Hide();
             gameObject.SetActive(true);
+        }
 
         public override void Clean ()
         {
@@ -45,13 +59,13 @@ namespace NFTViewer.UI
             switch(notificationType)
             {
                 case NotificationType.EmptySearch:
-                    _popupNotification.PlayNotification(NotificationType.EmptySearch.ToString());
+                    _popupNotification_EmptySearch.PlayNotification();
                     break;
                 case NotificationType.EmptySearchResult:
-                    _popupNotification.PlayNotification(NotificationType.EmptySearchResult.ToString());
+                    _popupNotification_EmptySearchResult.PlayNotification();
                     break;
                 case NotificationType.EmptySearchSample:
-                    _popupNotification.PlayNotification(NotificationType.EmptySearchSample.ToString());
+                    _popupNotification_EmptySearchSample.PlayNotification();
                     break;
             }
         }

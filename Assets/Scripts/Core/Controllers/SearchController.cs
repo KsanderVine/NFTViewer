@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using NFTViewer.UI;
-using Application = NFTViewer.Application;
+using UnityEngine;
 
 namespace NFTViewer
 {

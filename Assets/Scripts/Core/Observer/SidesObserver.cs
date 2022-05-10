@@ -28,12 +28,9 @@ namespace NFTViewer
             foreach (ISide side in _sides)
                 side.SetTexture(_defaultTexture);
 
-            Debug.Log("L: " + textures.Length);
-
             for (int i = 0; i < _sides.Length; i++)
             {
                 int repeatId = Mathf.FloorToInt(Mathf.Repeat(i, textures.Length));
-                Debug.Log("R: " + repeatId);
                 _sides[i].SetTexture(textures[repeatId]);
             }
         }

@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using DG.Tweening;
 using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace NFTViewer
 {
@@ -20,10 +19,12 @@ namespace NFTViewer
         private Color _selectedColor;
 
         [SerializeField]
-        public RectTransform _cursor;
+        private RectTransform _cursor;
 
         [SerializeField]
-        public Text[] _options;
+        private Text[] _options;
+
+        private int _defaultToolID;
 
         private void Awake()
         {
@@ -51,6 +52,22 @@ namespace NFTViewer
             CurrentToolID = 0;
         }
 
+        private void Start()
+        {
+            StartCoroutine(LateStart(0.1f));
+        }
+
+        IEnumerator LateStart(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            SetToggle(_defaultToolID, true);
+        }
+
+        public void SetDefaultToggle (int toolID)
+        {
+            _defaultToolID = toolID;
+        }
+
         public void SetToggle(int toolID, bool isSilent = false)
         {
             CurrentToolID = toolID;
@@ -70,8 +87,11 @@ namespace NFTViewer
                     option.DOColor(_normalColor, 0.5f);
             }
 
-            if (OnToggled != null)
-                OnToggled.Invoke(toolID);
+            if (isSilent == false)
+            {
+                if (OnToggled != null)
+                    OnToggled.Invoke(toolID);
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using SimpleJSON;
 using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
-using SimpleJSON;
 
 namespace NFTViewer
 {
@@ -66,10 +66,8 @@ namespace NFTViewer
             {
                 string url = searchSample.References[i].Url;
                 var www = UnityWebRequestTexture.GetTexture(url);
-
-                Debug.Log("Target URL: " + url);
+                
                 yield return www.SendWebRequest();
-
                 if (string.IsNullOrEmpty(www.error) || www.responseCode != 200)
                 {
                     Texture texture = DownloadHandlerTexture.GetContent(www);
