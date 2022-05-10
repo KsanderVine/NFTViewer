@@ -16,6 +16,8 @@ namespace NFTViewer
         private ViewMode _viewMode;
         private ViewMode[] _viewModes;
 
+        private Texture[] _textures;
+
         public void Awake()
         {
             _viewMode = ViewMode.View2D;
@@ -45,6 +47,13 @@ namespace NFTViewer
             }
         }
 
+        public void UpdateTextures (Texture[] textures)
+        {
+            _textures = textures;
+            _sidesObserver.SetTextures(textures);
+            _shapeObserver.SetTextures(textures);
+        }
+
         public void OnStateChanged(ApplicationState applicationState)
         {
             if (applicationState != ApplicationState.Browse)
@@ -64,11 +73,13 @@ namespace NFTViewer
             {
                 _shapeObserver.Hide();
                 _sidesObserver.Show();
+                _sidesObserver.SetTextures(_textures);
             }
             else
             {
                 _sidesObserver.Hide();
                 _shapeObserver.Show();
+                _shapeObserver.SetTextures(_textures);
             }
         }
     }

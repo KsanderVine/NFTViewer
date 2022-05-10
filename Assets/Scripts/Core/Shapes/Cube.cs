@@ -6,7 +6,7 @@ namespace NFTViewer
 {
     public class Cube : MonoBehaviour, IShape
     {
-        public int SidesCount => _sides.Length;
+        public int SidesCount => 6;
         private ISide[] _sides;
 
         public void Awake()
@@ -30,6 +30,9 @@ namespace NFTViewer
                 int repeatId = Mathf.FloorToInt(Mathf.Repeat(i, texturesCount));
                 sideTextures[i] = textures[repeatId];
             }
+
+            if(_sides == null)
+                _sides = GetComponentsInChildren<ISide>(true);
 
             for (int i = 0; i < SidesCount; i++)
                 _sides[i].SetTexture(sideTextures[i]);

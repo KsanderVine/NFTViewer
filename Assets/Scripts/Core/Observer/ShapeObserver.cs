@@ -22,10 +22,13 @@ namespace NFTViewer
                 controller.Deactivate();
         }
 
+        public void SetTextures(Texture[] textures)
+        {
+            _shape.SetTextures(textures);
+        }
+
         public void Show()
         {
-            // todo: load shape textures
-
             _shape.Show();
             foreach (IObserverController controller in _observerControllers)
                 controller.Activate();

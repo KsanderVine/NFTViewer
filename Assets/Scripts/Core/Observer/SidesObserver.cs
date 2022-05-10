@@ -12,29 +12,35 @@ namespace NFTViewer
 
         private ISide[] _sides;
 
-        public void Awake()
-        {
-            _sides = GetComponentsInChildren<ISide>();
-        }
-
         public void Hide()
         {
-            if (_sides != null)
-            {
-                foreach (ISide side in _sides)
-                {
-                    side.SetTexture(_defaultTexture);
-                }
-            }
+            _grid.gameObject.SetActive(false);
+        }
 
-            gameObject.SetActive(false);
+        public void SetTextures(Texture[] textures)
+        {
+            if(_sides == null)
+                _sides = _grid.GetComponentsInChildren<ISide>(true);
+
+            if (textures == null)
+                return;
+
+            foreach (ISide side in _sides)
+                side.SetTexture(_defaultTexture);
+
+            Debug.Log("L: " + textures.Length);
+
+            for (int i = 0; i < _sides.Length; i++)
+            {
+                int repeatId = Mathf.FloorToInt(Mathf.Repeat(i, textures.Length));
+                Debug.Log("R: " + repeatId);
+                _sides[i].SetTexture(textures[repeatId]);
+            }
         }
 
         public void Show()
         {
-            // todo: load shape textures
-
-            gameObject.SetActive(true);
+            _grid.gameObject.SetActive(true);
         }
     }
 }

@@ -8,11 +8,15 @@ namespace NFTViewer
 {
     public class SearchController : MonoBehaviour, IController
     {
+        private TextureLoader _textureLoader;
         private SearchView _searchView;
+        private SearchSample _lastSearchSample;
 
         public void Awake()
         {
+            _textureLoader = FindObjectOfType<TextureLoader>(true);
             _searchView = FindObjectOfType<SearchView>(true);
+
             _searchView.BackButton.onClick.AddListener(MoveToBrowse);
             _searchView.MenuButton.onClick.AddListener(MoveToMenu);
             _searchView.SubmitButton.onClick.AddListener(SubmitSearch);
@@ -22,7 +26,11 @@ namespace NFTViewer
 
         private void MoveToBrowse ()
         {
-            // todo: если данных нет, то попап
+            if (_lastSearchSample == null)
+            {
+                _searchView.Notify(NotificationType.EmptySearchSample);
+                return;
+            }
             Application.ChangeState(ApplicationState.Browse);
         }
 
@@ -33,16 +41,33 @@ namespace NFTViewer
 
         private void SubmitSearch ()
         {
-            string address = _searchView.AddressInputField.text;
+            ISearchRequest searchRequest = _searchView.GetSearchRequest();
 
-            if (string.IsNullOrEmpty(address))
+            if (searchRequest.IsAnyEmpty())
             {
-                // todo: если нет адреса, то попап
+                _searchView.Notify(NotificationType.EmptySearch);
+                return;
             }
-            
-            // todo: если нет данных на сервере, то _searchView.Clean();
 
+            _textureLoader.GetTextures(searchRequest, RequestCallback);
             Application.ChangeState(ApplicationState.Loading);
+        }
+
+        private void RequestCallback (SearchSample searchSample)
+        {
+            if (searchSample == null)
+            {
+                Application.ChangeState(ApplicationState.Search);
+                _searchView.Notify(NotificationType.EmptySearchResult);
+                _searchView.Clean();
+                return;
+            }
+
+            _lastSearchSample = searchSample;
+            Application.ChangeState(ApplicationState.Browse);
+
+            BrowseController browseController = FindObjectOfType<BrowseController>();
+            browseController.UpdateTextures(searchSample.GetAllTextures());
         }
 
         public void OnStateChanged(ApplicationState applicationState)

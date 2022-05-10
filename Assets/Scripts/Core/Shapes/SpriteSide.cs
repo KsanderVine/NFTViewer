@@ -8,13 +8,10 @@ namespace NFTViewer
     {
         private RawImage _rawImage;
 
-        private void Awake()
-        {
-            _rawImage = GetComponent<RawImage>();
-        }
-
         public void SetTexture(Texture texture)
         {
+            if(_rawImage == null)
+                _rawImage = GetComponent<RawImage>();
             _rawImage.texture = texture;
         }
     } 

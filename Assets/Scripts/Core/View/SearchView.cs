@@ -1,20 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace NFTViewer.UI
 {
-    public class SearchView : MonoBehaviour, IView, ICleanable
+    public abstract class SearchView : MonoBehaviour, IView
     {
-        [SerializeField]
-        private InputField _addressInputField;
-        public InputField AddressInputField { get => _addressInputField; }
-
-        [SerializeField]
-        private SmoothToolbar _addressTypeToolbar;
-        public SmoothToolbar AddressTypeToolbar { get => _addressTypeToolbar; }
-
         [SerializeField]
         private Button _submitButton;
         public Button SubmitButton { get => _submitButton; }
@@ -29,20 +19,12 @@ namespace NFTViewer.UI
 
         public bool IsVisible() => gameObject.activeInHierarchy;
 
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-        }
+        public abstract void Hide();
+        public abstract void Show();
 
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
+        public abstract void Notify(NotificationType notificationType);
 
-        public void Clean ()
-        {
-            _addressInputField.SetTextWithoutNotify("");
-            _addressTypeToolbar.SetToggle(0, true);
-        }
+        public abstract void Clean();
+        public abstract ISearchRequest GetSearchRequest();
     }
 }

@@ -24,4 +24,11 @@ namespace NFTViewer
         Owner = 1,
         Collection = 2,
     }
+
+    public enum NotificationType
+    {
+        EmptySearch,
+        EmptySearchResult,
+        EmptySearchSample
+    }
 }

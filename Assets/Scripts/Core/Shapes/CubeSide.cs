@@ -8,13 +8,10 @@ namespace NFTViewer
     {
         private MeshRenderer _meshRenderer;
 
-        public void Awake()
-        {
-            _meshRenderer = GetComponent<MeshRenderer>();
-        }
-
         public void SetTexture(Texture texture)
         {
+            if(_meshRenderer == null)
+                _meshRenderer = GetComponent<MeshRenderer>();
             _meshRenderer.material.SetTexture("_MainTex", texture);
         }
     }
