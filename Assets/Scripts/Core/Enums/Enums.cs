@@ -17,4 +17,11 @@ namespace NFTViewer
         View2D,
         View3D
     }
+
+    public enum AddressType
+    {
+        Creator = 0,
+        Owner = 1,
+        Collection = 2,
+    }
 }

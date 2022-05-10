@@ -16,7 +16,7 @@ namespace NFTViewer.UI
 
         public void Show()
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
     }
 }

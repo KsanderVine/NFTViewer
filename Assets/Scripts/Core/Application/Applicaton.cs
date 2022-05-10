@@ -12,6 +12,7 @@ namespace NFTViewer
 
         public static void ChangeState (ApplicationState applicationState)
         {
+            Debug.Log("New state: " + applicationState);
             OnStateChanged?.Invoke(applicationState);
         }
 
